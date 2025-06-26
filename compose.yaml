@@ -1,10 +1,12 @@
-version: '3.8'
 services:
   ksdbs:
     build :
       context: ./Docker-file/DB
     image: kartikeyadhub/ksdbs
     container_name : ksdbs
+    networks:
+      mynet:
+        ipv4_address: 172.20.0.100
     ports :
       - "3306:3306"
     volumes:
@@ -32,6 +34,14 @@ services:
     container_name : ksservice2
     ports :
       - "9002:9002"
+
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
 
 volumes:
   ksdbvol: {}
