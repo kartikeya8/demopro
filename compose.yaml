@@ -1,14 +1,8 @@
 services:
   db:
-    build :
-      context: ./Docker-file/DB
     image: kartikeyadhub/ksdbs
     container_name : ksdbs
-    networks:
-      mynet:
-        ipv4_address: 172.20.0.100
-    volumes:
-      - ksdbvol:/var/lib/mysql
+
 
   ser:
     build :
