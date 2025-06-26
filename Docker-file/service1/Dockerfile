@@ -1,6 +1,5 @@
 FROM kartikeyasoft/jdk17_onlineexam:v1.0.2 AS builder_image
-RUN ls -l
-RUN git clone https://github.com/ksrepo9/ksk8spro.git
+RUN git clone https://github.com/kartikeya8/demopro.git
 RUN cd /ksapp/ksk8spro/service1 && mvn install 
 
 FROM kartikeyasoft/jdk17:latest
