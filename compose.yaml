@@ -1,5 +1,5 @@
 services:
-  ksdbs:
+  db:
     build :
       context: ./Docker-file/DB
     image: kartikeyadhub/ksdbs
@@ -7,12 +7,10 @@ services:
     networks:
       mynet:
         ipv4_address: 172.20.0.100
-    ports :
-      - "3306:3306"
     volumes:
       - ksdbvol:/var/lib/mysql
 
-  server:
+  ser:
     build :
       context: ./Docker-file/server
     image: kartikeyadhub/ksserver
