@@ -1,25 +1,26 @@
+version: '3.8'
+
 services:
   db:
-    build :
-      context: ./Docker-file/DB
-    image: kartikeyadhub/ksdbs
-    container_name : ksdbs    
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: ksdb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin@123
+    container_name : ksdbs  
     networks:
       mynet:
-        ipv4_address: 172.20.0.100
-
-    ports :
-      - "3306:3306"
+        ipv4_address: 172.20.0.100  
     volumes:
-      - ksdbvol:/var/lib/mysql
-
-  server:
-    build :
-      context: ./Docker-file/server
-    image: kartikeyadhub/ksserver
-    container_name : ksserver
-    ports :
-      - "8761:8761"
+      - ./init-scripts:/docker-entrypoint-initdb.d  # Mount initialization scripts
+      - mysql_data:/var/lib/mysql  # Persistent data
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-prootpass"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
 
   service1:
     build :
@@ -28,13 +29,11 @@ services:
     container_name : ksservice1
     ports :
       - "9001:9001"
-  service2:
-    build :
-      context: ./Docker-file/service2
-    image: kartikeyadhub/ksservice2
-    container_name : ksservice2
-    ports :
-      - "9002:9002"
+
+
+
+volumes:
+  mysql_data:
 
 networks:
   mynet:
@@ -43,6 +42,3 @@ networks:
       config:
         - subnet: 172.20.0.0/16
           gateway: 172.20.0.1
-
-volumes:
-  ksdbvol: {}
