@@ -1,4 +1,4 @@
-FROM mysql:latest
+FROM mysql:8.0.33
 
 # Set root password (optional)
 ENV MYSQL_ROOT_PASSWORD=admin@123

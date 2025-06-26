@@ -1,5 +1,18 @@
 services:
-  ser:
+  ksdbs:
+    build :
+      context: ./Docker-file/DB
+    image: kartikeyadhub/ksdbs
+    container_name : ksdbs
+    networks:
+      mynet:
+        ipv4_address: 172.20.0.100
+    ports :
+      - "3306:3306"
+    volumes:
+      - ksdbvol:/var/lib/mysql
+
+  server:
     build :
       context: ./Docker-file/server
     image: kartikeyadhub/ksserver
@@ -14,7 +27,6 @@ services:
     container_name : ksservice1
     ports :
       - "9001:9001"
-
   service2:
     build :
       context: ./Docker-file/service2
@@ -23,7 +35,13 @@ services:
     ports :
       - "9002:9002"
 
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
 
 volumes:
   ksdbvol: {}
-
