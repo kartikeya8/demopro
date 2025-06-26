@@ -3,11 +3,11 @@ services:
     build :
       context: ./Docker-file/DB
     image: kartikeyadhub/ksdbs
-    container_name : ksdbs
-    command: --default-authentication-plugin=mysql_native_password
+    container_name : ksdbs    
     networks:
       mynet:
         ipv4_address: 172.20.0.100
+
     ports :
       - "3306:3306"
     volumes:
