@@ -1,6 +1,8 @@
 services:
-  ksdbservice:
-    image: db:latest
+  ksdbs:
+    build :
+      context: ./Docker-file/DB
+    image: kartikeyadhub/ksdbs
     container_name : ksdbs
     networks:
       mynet:
