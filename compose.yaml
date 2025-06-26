@@ -1,0 +1,37 @@
+services:
+  ksdbs:
+    build :
+      context: ./Docker-file/DB
+    image: kartikeyadhub/ksdbs
+    container_name : ksdbs
+    ports :
+      - "3306:3306"
+    volumes:
+      - ksdbvol:/var/lib/mysql
+
+  server:
+    build :
+      context: ./Docker-file/server
+    image: kartikeyadhub/ksserver
+    container_name : ksserver
+    ports :
+      - "8761:8761"
+
+  service1:
+    build :
+      context: ./Docker-file/service1
+    image: kartikeyadhub/ksservice1
+    container_name : ksservice1
+    ports :
+      - "9001:9001"
+  service2:
+    build :
+      context: ./Docker-file/service2
+    image: kartikeyadhub/ksservice2
+    container_name : ksservice2
+    ports :
+      - "9002:9002"
+
+volumes:
+  ksdbvol: {}
+
