@@ -25,7 +25,7 @@ pipeline {
                         attempt=0
                         max_attempts=12  # 12 attempts * 5s = 60s total
                         while [ $attempt -lt $max_attempts ]; do
-                            if docker-compose -f ${COMPOSE_FILE} exec db mysqladmin ping -uroot -prootpass --silent; then
+                            if docker compose -f ${COMPOSE_FILE} exec db mysqladmin ping -uroot -prootpass --silent; then
                                 break
                             fi
                             echo "Waiting for MySQL... (Attempt $((attempt+1))/$max_attempts)";
