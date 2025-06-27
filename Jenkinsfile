@@ -3,7 +3,7 @@ pipeline {
         label 'docker'
     }
     environment {
-        COMPOSE_FILE = 'compose.yml'
+        COMPOSE_FILE = 'compose.yaml'
         DOCKER_REGISTRY = 'kartikeyadhub'  // Optional for pushing images
     }
     stages {
