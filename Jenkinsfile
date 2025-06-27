@@ -39,7 +39,7 @@ pipeline {
                      '''
                     
                     // Build application services after DB is ready
-                    sh 'docker compose -f ${COMPOSE_FILE} build app'
+                    sh 'docker compose -f ${COMPOSE_FILE} build server --no-cache'
                 }
             }
         }
