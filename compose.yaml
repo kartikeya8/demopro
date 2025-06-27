@@ -24,13 +24,13 @@ services:
       timeout: 5s
       retries: 15
 
-  service1:
+  server:
     build :
-      context: ./Docker-file/service1
-    image: kartikeyadhub/ksservice1
-    container_name : ksservice1
+      context: ./Docker-file/server
+    image: kartikeyadhub/ksserver
+    container_name : ksserver
     ports :
-      - "9001:9001"
+      - "8761:8761"
 
 
 
