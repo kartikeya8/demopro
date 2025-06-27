@@ -45,19 +45,27 @@ pipeline {
                 }
             }
         }
-
-
-        stage('Docker Push') {
+        stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable:
-                'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USER')]) 
-                {
-                sh """
-                echo "$DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USER --password-stdin
-                """
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        # Login without persisting credentials
+                        echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+                        
+                        docker push yourimage:tag
+                        
+                        # Explicitly remove credentials
+                        rm -f ~/.docker/config.json
+                    '''
                 }
             }
         }
+
+
 
 
         
