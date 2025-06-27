@@ -40,8 +40,8 @@ pipeline {
                      '''
                     
                     // Build application services after DB is ready
-                   // sh 'docker compose -f ${COMPOSE_FILE} build server --no-cache'
-                   // sh 'docker compose -f ${COMPOSE_FILE} up -d server'
+                   sh 'docker compose -f ${COMPOSE_FILE} build server --no-cache'
+                   sh 'docker compose -f ${COMPOSE_FILE} up -d server'
                 }
             }
         }
