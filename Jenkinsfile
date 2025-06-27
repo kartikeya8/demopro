@@ -65,9 +65,10 @@ pipeline {
             }
         }       
     }
-}
+
 post {
         always {
             sh 'docker compose -f ${COMPOSE_FILE} down -v'  // Cleanup
         }
+}
 }
