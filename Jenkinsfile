@@ -40,8 +40,8 @@ pipeline {
                      '''
                     
                     // Build application services after DB is ready
-                    sh 'docker compose -f ${COMPOSE_FILE} build server --no-cache'
-                    sh 'docker compose -f ${COMPOSE_FILE} up -d server'
+                   // sh 'docker compose -f ${COMPOSE_FILE} build server --no-cache'
+                   // sh 'docker compose -f ${COMPOSE_FILE} up -d server'
                 }
             }
         }
@@ -53,7 +53,7 @@ pipeline {
                 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USER')]) 
                 {
                 sh """
-                docker login -u $DOCKERHUB_USER --password-stdin
+                echo "$DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USER --password-stdin
                 """
                 }
             }
