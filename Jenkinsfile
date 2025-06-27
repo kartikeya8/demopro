@@ -45,19 +45,7 @@ pipeline {
                 }
             }
         }
-<<<<<<< HEAD
-     stage('Run Tests') {
-            steps {
-                sh 'docker compose -f ${COMPOSE_FILE} run --rm server mvn test'
-            }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml'
-                    archiveArtifacts '**/target/*.jar'
-                }
-            }
-        }    
-=======
+
 
         stage('Docker Push') {
             steps {
@@ -74,7 +62,7 @@ pipeline {
 
         
 
->>>>>>> a986e87 (new change)
+
        
     }
 }
