@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent docker
     environment {
         COMPOSE_FILE = 'compose.yml'
         DOCKER_REGISTRY = 'kartikeyadhub'  // Optional for pushing images
