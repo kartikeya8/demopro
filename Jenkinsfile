@@ -68,7 +68,7 @@ pipeline {
 
 post {
         always {
-            sh 'docker compose -f ${COMPOSE_FILE} down -v'  // Cleanup
+            sh 'docker compose -f ${COMPOSE_FILE} down -v'  // Cleanup ### Dont Add this step
         }
 }
 }
